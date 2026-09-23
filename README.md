@@ -1,32 +1,52 @@
-﻿# FinSight | Finance Analysis
+# FinSight | Finance Analysis
 
-Power BI finance project with one reproducible Jupyter Notebook for Python cleaning, SQLite KPI views, and visualization. Open `FINANACE ANALYSIS PROJECT.pbip` in Power BI Desktop. Keep the two raw CSVs at the project root: the existing model references their current location.
+A Power BI finance dashboard and analysis project for exploring customer and transaction trends, KPI views, and reporting-ready datasets.
 
-## Folder map
+This repository includes:
+- the Power BI project files (`.pbip`, `.Report`, `.SemanticModel`)
+- source data files (`customers.csv`, `finance_transactions.csv`)
+- a reproducible Python notebook for cleaning and analysis
+- SQL KPI view definitions and optional Power Query scripts
+- supporting design assets and business requirements
+
+## Project structure
 
 | Path | Purpose |
 | --- | --- |
-| `FINANACE ANALYSIS PROJECT.pbip`, `.Report/`, `.SemanticModel/` | Original Power BI project |
-| `customers.csv`, `finance_transactions.csv` | Original source data; unchanged |
-| `analysis/Finance_Analysis.ipynb` | **The single Python workflow**: clean, validate, build SQL, visualize |
-| `analysis/sql/views.sql` | KPI view definitions used by the notebook |
-| `analysis/power_query/` | Optional reviewed Power Query M alternatives |
-| `analysis/preview.png` | Sample static result |
-| `docs/Business Requirements.docx` | Original business brief |
-| `assets/source_images/` | Original design images; report has its own embedded resources |
-| `archive/Course_Materials/` | Local course drafts, excluded from Git |
+| `FINANACE ANALYSIS PROJECT.pbip` | Power BI project entry point |
+| `FINANACE ANALYSIS PROJECT.Report/` | Power BI report definition |
+| `FINANACE ANALYSIS PROJECT.SemanticModel/` | Semantic model definition |
+| `customers.csv` | Customer dataset |
+| `finance_transactions.csv` | Finance transaction dataset |
+| `analysis/Finance_Analysis.ipynb` | Main Python workflow for cleaning, validation, and KPI generation |
+| `analysis/sql/views.sql` | SQL KPI views used by the notebook |
+| `analysis/power_query/` | Optional M-based Power Query alternatives |
+| `analysis/README.md` | Data checks and SQL notes |
+| `docs/Business Requirements.docx` | Business brief |
+| `assets/source_images/` | Source visual assets |
+| `archive/` | Local non-portfolio working materials |
 
-## Run the notebook
+## Quick start
 
-Install Python 3.11+ and dependencies, then open `analysis/Finance_Analysis.ipynb` in JupyterLab or VS Code and run cells top to bottom:
+### 1) Open the report
+Open `FINANACE ANALYSIS PROJECT.pbip` in Power BI Desktop.
 
+### 2) Run the Python analysis notebook
 ```powershell
 python -m pip install -r analysis/requirements.txt
 python -m jupyter lab
 ```
+Then open `analysis/Finance_Analysis.ipynb` and run the cells in order.
 
-Start Jupyter from this project folder. The notebook can also run from `analysis/`; if launched elsewhere, set `FINANCE_PROJECT_ROOT` to this folder. It writes cleaned CSVs, `quality_report.json`, `finance.sqlite`, a PNG chart, and an interactive Plotly HTML to `analysis/output/`. That output is local and ignored by Git. Query the database with `SELECT * FROM v_kpi_overview;` or the other views in `analysis/sql/views.sql`.
+The notebook creates local analysis outputs under `analysis/output/` such as cleaned data, SQLite DB files, quality checks, and charts. Those generated files are ignored by Git.
 
-`amount` is signed transaction **volume**, not bank revenue. Blank fees remain unknown. The current Power BI model uses different rules (absolute amount and filling blank fees with `14.52`), so its dashboard figures will differ until its Power Query steps are deliberately updated. The notebook and M alternatives do **not** change the report. See [analysis/README.md](analysis/README.md) for data checks and SQL definitions.
+## Important notes
 
-Local Git is initialized; no commit, remote, or upload has been made.
+- `amount` is a signed transaction volume, not bank revenue.
+- Blank fee values remain unknown.
+- The Power BI model uses reporting-specific rules that may differ from the Python analysis logic.
+- The notebook and M scripts do not modify the main report; they support analysis and validation.
+
+## Repository status
+
+This project is published to GitHub and tracks the main branch.

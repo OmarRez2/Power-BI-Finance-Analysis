@@ -1,14 +1,32 @@
-# Power BI Desktop local cache and machine settings
+# Power BI / local app caches
 **/.pbi/
+**/.tmp/
+**/.cache/
+*.bak
+*.tmp
+*.log
 
-# Regenerable analysis artifacts
-analysis/output/
+# Python / notebooks
 __pycache__/
 *.py[cod]
+.ipynb_checkpoints/
 .venv/
+venv/
+.env
+.env.*
 
-# Local teaching pack, separate from the portfolio project
+# Generated analysis outputs
+analysis/output/
+analysis/*.html
+analysis/*.png
+analysis/*.json
+analysis/*.sqlite
+
+# Local course / non-portfolio files
 archive/
 
-# Historical working backups
-*.bak
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
