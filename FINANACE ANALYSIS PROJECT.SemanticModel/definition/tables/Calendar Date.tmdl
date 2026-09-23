@@ -1,0 +1,48 @@
+table 'Calendar Date'
+	lineageTag: d2984d8f-1c83-401e-86ff-24063ab7af03
+
+	column Date
+		formatString: mmmm d\, yyyy
+		lineageTag: 7d4645d2-860d-4d4e-9c6b-1e5859c81e71
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: 846bb6d9-255a-4c80-86de-41a35ee043de
+			defaultHierarchy: LocalDateTable_4541a955-25ee-4b6a-b257-b4aacc2bb3a0.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Year = YEAR('Calendar Date'[Date])
+		formatString: 0
+		lineageTag: ad962c5b-bbc0-4f92-8d9d-61e8a8a117c2
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month = FORMAT('Calendar Date'[Date],"mmm")
+		lineageTag: a2660876-5f91-4f31-a816-0199a3ec3cac
+		summarizeBy: none
+		sortByColumn: 'Month No'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month No' = MONTH('Calendar Date'[Date])
+		formatString: 0
+		lineageTag: 1fa10b1e-2a79-4302-8566-ac9e848e1b93
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Calendar Date' = calculated
+		mode: import
+		source = CALENDAR(MIN(finance_transactions[transaction_date]),MAX(finance_transactions[transaction_date]))
+
+	annotation PBI_Id = 561d51faa73a433fbb528977a4b4bbbd
+

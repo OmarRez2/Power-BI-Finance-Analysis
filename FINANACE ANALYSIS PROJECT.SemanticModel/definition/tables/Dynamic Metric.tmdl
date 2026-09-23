@@ -1,0 +1,50 @@
+table 'Dynamic Metric'
+	lineageTag: 6e41680d-5fb7-4443-a844-5b737d21227a
+
+	column 'Dynamic Metric'
+		lineageTag: 450db0ff-cabc-4191-9858-cea461924e99
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Dynamic Metric Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Dynamic Metric Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dynamic Metric Fields'
+		isHidden
+		lineageTag: 500b0e8d-d5a8-49ae-91db-904a751adff6
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Dynamic Metric Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dynamic Metric Order'
+		isHidden
+		formatString: 0
+		lineageTag: 7726ef38-8906-4f49-bc94-7514115a27dc
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Dynamic Metric' = calculated
+		mode: import
+		source =
+				{
+				    ("Total Amount", NAMEOF('_Measures'[Total Amount]), 0),
+				    ("Total Transactions", NAMEOF('_Measures'[Total Transactions]), 1),
+				    ("Total Fees", NAMEOF('_Measures'[Total Fees]), 2),
+				    ("Total Tax", NAMEOF('_Measures'[Total Tax]), 3)
+				}
+
+	annotation PBI_Id = fb8f00c4a73d48aeae60dabc3beef4b9
+

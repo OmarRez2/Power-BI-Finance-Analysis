@@ -1,0 +1,14 @@
+# Power BI Desktop local cache and machine settings
+**/.pbi/
+
+# Regenerable analysis artifacts
+analysis/output/
+__pycache__/
+*.py[cod]
+.venv/
+
+# Local teaching pack, separate from the portfolio project
+archive/
+
+# Historical working backups
+*.bak

@@ -1,0 +1,234 @@
+table _Measures
+	lineageTag: 82a52953-690c-4c18-b481-f17bdea4e3fc
+
+	measure 'Finance Analysis Title' = "Finance Analysis"
+		displayFolder: 06 Titles
+		lineageTag: 1dd24151-f32a-4eee-8945-a4deb87877d3
+
+	measure 'Total Amount' = SUM(finance_transactions[amount])
+		formatString: "₹"\ #,0.00;#,0.00\ -"₹";"₹"\ #,0.00
+		displayFolder: 01 Amount
+		lineageTag: c7f76598-6b67-4063-bafd-c15182bd7eaf
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-IN"}
+
+	measure 'PY Amount' = CALCULATE([Total Amount] , SAMEPERIODLASTYEAR('Calendar Date'[Date]))
+		displayFolder: 01 Amount
+		lineageTag: 0756e2b7-44b1-4f2b-ab35-863bad081bee
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'YOY Amount' = [Total Amount] - [PY Amount]
+		displayFolder: 01 Amount
+		lineageTag: e5bba883-2703-4da1-b5d6-837b353539c4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'YOY % Amount' = DIVIDE([YOY Amount] , [PY Amount],0)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 01 Amount
+		lineageTag: cfaf228d-446d-4a03-bb16-8bd54d408050
+
+	measure 'Total Transactions' = DISTINCTCOUNT(finance_transactions[transaction_id])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: 02 Transactions
+		lineageTag: bacb95c8-f0fd-4798-be31-32c66cc9bbca
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'PY Transaction' = CALCULATE([Total Transactions],SAMEPERIODLASTYEAR('Calendar Date'[Date]))
+		formatString: 0
+		displayFolder: 02 Transactions
+		lineageTag: dc6cdeb5-a257-4d83-84a0-fef71a156091
+
+	measure 'YOY Transaction' = [Total Transactions] - [PY Transaction]
+		formatString: 0
+		displayFolder: 02 Transactions
+		lineageTag: 697ea1e4-4059-49d7-b3a5-ef1c79223fa9
+
+	measure 'YOY % Transaction' = DIVIDE([YOY Transaction],[PY Transaction],0)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 02 Transactions
+		lineageTag: 36c1bbd5-1f48-4206-98a4-59bd5ba199e8
+
+	measure 'AVG Transaction Value' = AVERAGE(finance_transactions[amount])
+		formatString: "₹"\ #,0.00;#,0.00\ -"₹";"₹"\ #,0.00
+		displayFolder: 03 Avg Transaction Value
+		lineageTag: ff3a869d-13da-4bdc-a864-930245ad2a2c
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-IN"}
+
+	measure 'PY AVG Transaction' = CALCULATE([AVG Transaction Value],SAMEPERIODLASTYEAR('Calendar Date'[Date]))
+		displayFolder: 03 Avg Transaction Value
+		lineageTag: 5ecc5566-438a-41b9-8221-5f90a74ab35a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'YOY AVG Transaction' = [AVG Transaction Value] - [PY AVG Transaction]
+		displayFolder: 03 Avg Transaction Value
+		lineageTag: 0088e86f-cd70-411d-bf4e-754989cca493
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'YOY % AVG Transaction' = DIVIDE([YOY AVG Transaction],[PY AVG Transaction],0)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 03 Avg Transaction Value
+		lineageTag: 5e91d752-eeb6-4b3f-bf84-1d1e6ab08d4a
+
+	measure 'Total Fees' = SUM(finance_transactions[fee_amount])
+		formatString: "₹"\ #,0.00;#,0.00\ -"₹";"₹"\ #,0.00
+		displayFolder: 04 Fees
+		lineageTag: f0e1f937-7188-4d90-98f0-816a46aedd3f
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-IN"}
+
+	measure 'PY Fees' = CALCULATE([Total Fees],SAMEPERIODLASTYEAR('Calendar Date'[Date]))
+		displayFolder: 04 Fees
+		lineageTag: b479274e-3b64-4b11-82eb-f13c83aefed4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'YOY Fees' = [Total Fees] - [PY Fees]
+		displayFolder: 04 Fees
+		lineageTag: 9f07b4d7-d679-4052-9ba1-ce7970eb6070
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'YOY % Fees' = DIVIDE([YOY Fees] , [PY Fees],0)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 04 Fees
+		lineageTag: 85f119fa-1cfb-436d-b1ef-8c951fff49f8
+
+	measure 'Total Tax' = SUM(finance_transactions[tax_amount])
+		formatString: "₹"\ #,0.00;#,0.00\ -"₹";"₹"\ #,0.00
+		displayFolder: 05 Tax
+		lineageTag: 2797c6ed-09e9-40d9-90a5-fa9dd8757f05
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-IN"}
+
+	measure 'PY Tax' = CALCULATE([Total Tax] , SAMEPERIODLASTYEAR('Calendar Date'[Date]))
+		displayFolder: 05 Tax
+		lineageTag: 3f581400-daf1-4a78-87f7-c1766281fb43
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'YOY Tax' = [Total Tax] - [PY Tax]
+		displayFolder: 05 Tax
+		lineageTag: 38182f23-1d42-4b44-9f09-13ef702c8a13
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'YOY % Tax' = DIVIDE([YOY Tax],[PY Tax],0)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 05 Tax
+		lineageTag: 9bff0a5a-4c36-4a00-a3b2-d8baf1198fb5
+
+	measure 'FinSight Landing HTML' = ```
+			
+			    "<div class='fs-page'>"
+			 &
+			    "<div class='fs-grid'></div>"
+			 &
+			    "<div class='fs-glow fs-glow-a'></div><div class='fs-glow fs-glow-b'></div>"
+			 &
+			    "<div class='fs-topbar'>"
+			 &
+			    "<div class='fs-logo'><span class='fs-logo-bars'><i></i><i></i><i></i><i></i></span><strong>FinSight</strong></div>"
+			 &
+			    "<div class='fs-topright'><span class='fs-edition'>FINANCE ANALYTICS</span><span class='fs-pulse'></span><span>PROJECT OVERVIEW</span></div>"
+			 &
+			    "</div>"
+			 &
+			    "<div class='fs-hero'>"
+			 &
+			    "<div class='fs-copy'>"
+			 &
+			    "<div class='fs-eyebrow'><span class='fs-dash'></span> TRANSACTIONS · CUSTOMERS · RISK</div>"
+			 &
+			    "<h1>Finance,<br><em>made clear.</em></h1>"
+			 &
+			    "<p>Explore transactions, customers and risk in one connected view.</p>"
+			 &
+			    "<div class='fs-actions' aria-hidden='true'>"
+			 &
+			    "<span class='fs-cta fs-cta-primary'>Open Overview <b>→</b></span>"
+			 &
+			    "<span class='fs-cta fs-cta-secondary'>Explore Transactions <b>↗</b></span>"
+			 &
+			    "</div>"
+			 &
+			    "<div class='fs-trust'><span><b>◉</b> Data-led thinking</span><span><b>◉</b> Clearer decisions</span></div>"
+			 &
+			    "</div>"
+			 &
+			    "<div class='fs-visual'>"
+			 &
+			    "<div class='fs-panel-halo'></div>"
+			 &
+			    "<div class='fs-main-panel'>"
+			 &
+			    "<div class='fs-panel-top'><span>ACTIVITY OVERVIEW</span><span class='fs-dots'>● ● ●</span></div>"
+			 &
+			    "<svg class='fs-chart' viewBox='0 0 760 390' preserveAspectRatio='none' aria-hidden='true'>"
+			 &
+			    "<defs><linearGradient id='fsGold' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#f4c75e' stop-opacity='.28'/><stop offset='1' stop-color='#f4c75e' stop-opacity='0'/></linearGradient><linearGradient id='fsBlue' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#4c9aff' stop-opacity='.18'/><stop offset='1' stop-color='#4c9aff' stop-opacity='0'/></linearGradient></defs>"
+			 &
+			    "<g class='fs-vbars'><rect x='24' y='255' width='30' height='100'/><rect x='86' y='225' width='30' height='130'/><rect x='148' y='272' width='30' height='83'/><rect x='210' y='195' width='30' height='160'/><rect x='272' y='224' width='30' height='131'/><rect x='334' y='166' width='30' height='189'/><rect x='396' y='184' width='30' height='171'/><rect x='458' y='126' width='30' height='229'/><rect x='520' y='149' width='30' height='206'/><rect x='582' y='102' width='30' height='253'/><rect x='644' y='135' width='30' height='220'/><rect x='706' y='76' width='30' height='279'/></g>"
+			 &
+			    "<path d='M0 264 C54 264 58 238 110 245 S182 282 230 236 S298 189 350 206 S430 166 482 173 S552 111 600 130 S676 60 760 78 L760 390 L0 390Z' fill='url(#fsGold)'/>"
+			 &
+			    "<path class='fs-line-gold' d='M0 264 C54 264 58 238 110 245 S182 282 230 236 S298 189 350 206 S430 166 482 173 S552 111 600 130 S676 60 760 78' fill='none' stroke='#f4c75e' stroke-width='4'/>"
+			 &
+			    "<path d='M0 319 C55 326 74 292 122 302 S190 331 242 302 S314 263 364 283 S446 245 494 258 S578 200 630 228 S702 166 760 180 L760 390 L0 390Z' fill='url(#fsBlue)'/>"
+			 &
+			    "<path class='fs-line-blue' d='M0 319 C55 326 74 292 122 302 S190 331 242 302 S314 263 364 283 S446 245 494 258 S578 200 630 228 S702 166 760 180' fill='none' stroke='#5ba5ff' stroke-width='3'/>"
+			 &
+			    "<circle cx='600' cy='130' r='7' fill='#f4c75e'/><circle cx='630' cy='228' r='6' fill='#69b3ff'/>"
+			 &
+			    "</svg>"
+			 &
+			    "<div class='fs-axis'><span>JAN</span><span>MAR</span><span>MAY</span><span>JUL</span><span>SEP</span><span>DEC</span></div>"
+			 &
+			    "</div>"
+			 &
+			    "<div class='fs-float fs-float-one'><span class='fs-float-icon'>▥</span><span>Transactions<small>Activity and trends</small></span></div>"
+			 &
+			    "<div class='fs-float fs-float-two'><span class='fs-float-icon'>◈</span><span>Customers<small>Segments and reach</small></span></div>"
+			 &
+			    "<div class='fs-float fs-float-three'><span class='fs-float-icon'>◇</span><span>Risk<small>Quality and signals</small></span></div>"
+			 &
+			    "</div>"
+			 &
+			    "</div>"
+			 &
+			    "<div class='fs-section-top'><span>EXPLORE THE STORY</span><i></i><span>01 — 03</span></div>"
+			 &
+			    "<div class='fs-features'>"
+			 &
+			    "<div class='fs-feature'><div class='fs-feature-head'><span class='fs-feature-icon'>▥</span><span class='fs-arrow'>↗</span></div><strong>Transaction Trends</strong><p>See how activity changes over time, channel and transaction type.</p><div class='fs-mini-bars'><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>"
+			 &
+			    "<div class='fs-feature'><div class='fs-feature-head'><span class='fs-feature-icon'>◎</span><span class='fs-arrow'>↗</span></div><strong>Customer Insights</strong><p>Understand customer segments and where activity is concentrated.</p><div class='fs-mini-track'><span></span><span></span><span></span></div></div>"
+			 &
+			    "<div class='fs-feature'><div class='fs-feature-head'><span class='fs-feature-icon'>◇</span><span class='fs-arrow'>↗</span></div><strong>Risk &amp; Quality</strong><p>Explore status, fraud flags and the quality of the source data.</p><div class='fs-mini-risk'><i></i><i></i><i></i></div></div>"
+			 &
+			    "</div>"
+			 &
+			    "<div class='fs-foot'>FIN SIGHT <span>•</span> TRANSACTION INTELLIGENCE</div>"
+			 &
+			    "</div>"
+			
+			```
+		lineageTag: 11a793c8-652e-4a7f-8973-03b65e1e589a
+
+	partition _Measures = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMlSKjQUA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", Int64.Type}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

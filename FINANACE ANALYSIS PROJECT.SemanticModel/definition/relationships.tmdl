@@ -1,0 +1,18 @@
+relationship AutoDetected_2fefbb11-6b26-4385-a5b0-74ce4563da21
+	fromColumn: finance_transactions.customer_id
+	toColumn: customers.customer_id
+
+relationship 69faa51f-0d01-4660-9535-70cbd0c1facd
+	joinOnDateBehavior: datePartOnly
+	fromColumn: customers.join_date
+	toColumn: LocalDateTable_e31c3ab4-a685-4f3a-b4b1-3b03931862be.Date
+
+relationship 846bb6d9-255a-4c80-86de-41a35ee043de
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Calendar Date'.Date
+	toColumn: LocalDateTable_4541a955-25ee-4b6a-b257-b4aacc2bb3a0.Date
+
+relationship 5a03b679-59fe-6c01-6e26-d1f0bcc0b04e
+	fromColumn: finance_transactions.transaction_date
+	toColumn: 'Calendar Date'.Date
+

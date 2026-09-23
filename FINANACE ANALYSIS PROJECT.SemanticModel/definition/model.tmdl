@@ -1,0 +1,26 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["finance_transactions","customers","_Measures"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table finance_transactions
+ref table customers
+ref table DateTableTemplate_3b5c9c8c-2bc9-4ca7-bd9c-1befa6290e69
+ref table LocalDateTable_e31c3ab4-a685-4f3a-b4b1-3b03931862be
+ref table 'Calendar Date'
+ref table LocalDateTable_4541a955-25ee-4b6a-b257-b4aacc2bb3a0
+ref table _Measures
+ref table 'Dynamic Metric'
+
+ref cultureInfo en-US
+

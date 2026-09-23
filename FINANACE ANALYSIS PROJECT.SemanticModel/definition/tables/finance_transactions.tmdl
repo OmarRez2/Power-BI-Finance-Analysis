@@ -1,0 +1,155 @@
+table finance_transactions
+	lineageTag: 797833af-a776-45be-b39c-e43880cbac2f
+
+	column transaction_id
+		dataType: string
+		lineageTag: d15dac85-1087-47f0-8083-f13480227891
+		summarizeBy: none
+		sourceColumn: transaction_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column transaction_date
+		dataType: dateTime
+		formatString: mmmm d\, yyyy
+		lineageTag: 70eadeab-6ab2-4d70-8183-1fbf4826a72d
+		summarizeBy: none
+		sourceColumn: transaction_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column account_id
+		dataType: string
+		lineageTag: 3e779b79-7c2d-4021-9952-dc6c2b86b032
+		summarizeBy: none
+		sourceColumn: account_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_id
+		dataType: string
+		lineageTag: a54faf8a-5f63-4414-b4d5-f3217fa44723
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column transaction_type
+		dataType: string
+		lineageTag: c01971dd-e21c-4702-81a2-28623449ca98
+		summarizeBy: none
+		sourceColumn: transaction_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel
+		dataType: string
+		lineageTag: ab871902-05a9-4b40-a050-e29c83d29596
+		summarizeBy: none
+		sourceColumn: channel
+
+		annotation SummarizationSetBy = Automatic
+
+	column merchant_category
+		dataType: string
+		lineageTag: 6a48217f-5dcf-4d8d-b78f-1ccdc4ee54ab
+		summarizeBy: none
+		sourceColumn: merchant_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column amount
+		dataType: double
+		lineageTag: 3d7f2efb-b116-4f72-8aab-107778296c6b
+		summarizeBy: sum
+		sourceColumn: amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fee_amount
+		dataType: double
+		lineageTag: cb8c3281-9b0b-4862-9385-3e657547f512
+		summarizeBy: sum
+		sourceColumn: fee_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column tax_amount
+		dataType: double
+		lineageTag: 5ceb7d30-86df-410f-ba1a-26e3d5d65c1c
+		summarizeBy: sum
+		sourceColumn: tax_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column currency
+		dataType: string
+		lineageTag: 5654b482-6042-4d7c-a93c-1596151c0855
+		summarizeBy: none
+		sourceColumn: currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column transaction_status
+		dataType: string
+		lineageTag: fdbf7800-8e1e-4a6d-ab9b-e8b8513405cf
+		summarizeBy: none
+		sourceColumn: transaction_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_fraud
+		dataType: string
+		lineageTag: 0c99103e-1e20-43f9-a183-86e83be35f07
+		summarizeBy: none
+		sourceColumn: is_fraud
+
+		annotation SummarizationSetBy = Automatic
+
+	column risk_score
+		dataType: double
+		formatString: 0
+		lineageTag: abc53cd3-edf3-4819-894d-23707a551e30
+		summarizeBy: sum
+		sourceColumn: risk_score
+
+		annotation SummarizationSetBy = Automatic
+
+	column reference_no
+		dataType: string
+		lineageTag: a25e5df5-0075-4fbc-98cc-b7d7c27cec2c
+		summarizeBy: none
+		sourceColumn: reference_no
+
+		annotation SummarizationSetBy = Automatic
+
+	partition finance_transactions = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("E:\BI Projects\Power BI - Finance Analysis\finance_transactions.csv"),[Delimiter=",", Columns=15, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type with Locale" = Table.TransformColumnTypes(#"Promoted Headers", {{"transaction_date", type date}}, "en-GB"),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Changed Type with Locale",{{"amount", type number}, {"fee_amount", type number}, {"tax_amount", type number}, {"risk_score", type number}}),
+				    #"Removed Duplicates" = Table.Distinct(#"Changed Type", {"transaction_id"}),
+				    #"Trimmed Text" = Table.TransformColumns(#"Removed Duplicates",{{"channel", Text.Trim, type text}}),
+				    #"Calculated Absolute Value" = Table.TransformColumns(#"Trimmed Text",{{"amount", Number.Abs, type number}}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Calculated Absolute Value",null,14.52,Replacer.ReplaceValue,{"fee_amount"}),
+				    #"Uppercased Text" = Table.TransformColumns(#"Replaced Value",{{"currency", Text.Upper, type text}})
+				in
+				    #"Uppercased Text"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

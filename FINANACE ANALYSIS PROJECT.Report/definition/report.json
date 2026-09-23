@@ -1,0 +1,122 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.3.0/schema.json",
+  "themeCollection": {
+    "baseTheme": {
+      "name": "Fluent2-CY26SU08",
+      "reportVersionAtImport": {
+        "visual": "2.12.0",
+        "report": "3.4.0",
+        "page": "2.3.1"
+      },
+      "type": "SharedResources"
+    }
+  },
+  "objects": {
+    "section": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Top'"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspacePane": [
+      {
+        "properties": {
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "publicCustomVisuals": [
+    "htmlContent443BE3AD55E043BF878BED274D3A6855"
+  ],
+  "resourcePackages": [
+    {
+      "name": "SharedResources",
+      "type": "SharedResources",
+      "items": [
+        {
+          "name": "Fluent2-CY26SU08",
+          "path": "BaseThemes/Fluent2-CY26SU08.json",
+          "type": "BaseTheme"
+        }
+      ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "filter2309554607450629.png",
+          "path": "filter2309554607450629.png",
+          "type": "Image"
+        },
+        {
+          "name": "FinSight_Logo513126007507289.png",
+          "path": "FinSight_Logo513126007507289.png",
+          "type": "Image"
+        },
+        {
+          "name": "gross_(3)4417284804887732.png",
+          "path": "gross_(3)4417284804887732.png",
+          "type": "Image"
+        },
+        {
+          "name": "histogram37880124312278785.png",
+          "path": "histogram37880124312278785.png",
+          "type": "Image"
+        },
+        {
+          "name": "menu_(3)532759173288028.png",
+          "path": "menu_(3)532759173288028.png",
+          "type": "Image"
+        },
+        {
+          "name": "taxes5556506827313451.png",
+          "path": "taxes5556506827313451.png",
+          "type": "Image"
+        },
+        {
+          "name": "toilet-8009042902619423.png",
+          "path": "toilet-8009042902619423.png",
+          "type": "Image"
+        },
+        {
+          "name": "transaction_(1)01913163436395704.png",
+          "path": "transaction_(1)01913163436395704.png",
+          "type": "Image"
+        },
+        {
+          "name": "verified3509357139397209.png",
+          "path": "verified3509357139397209.png",
+          "type": "Image"
+        },
+        {
+          "name": "wage780253487856101.png",
+          "path": "wage780253487856101.png",
+          "type": "Image"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "useStylableVisualContainerHeader": true,
+    "exportDataMode": "AllowSummarized",
+    "defaultDrillFilterOtherVisuals": true,
+    "allowChangeFilterTypes": true,
+    "useEnhancedTooltips": true,
+    "useDefaultAggregateDisplayName": true
+  }
+}

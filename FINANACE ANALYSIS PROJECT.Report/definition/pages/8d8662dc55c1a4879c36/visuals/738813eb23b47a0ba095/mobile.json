@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainerMobileState/2.7.0/schema.json",
+  "position": {
+    "x": 171.16968196533995,
+    "y": 1468.0135135135135,
+    "z": 12000,
+    "height": 40,
+    "width": 17.550942677585223,
+    "tabOrder": 9000
+  }
+}

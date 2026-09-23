@@ -1,0 +1,110 @@
+table customers
+	lineageTag: e932b9a8-b064-4526-a75a-35e2fa64fedf
+
+	column customer_id
+		dataType: string
+		lineageTag: b4801e7e-cb2a-4082-af4c-5036f78f4896
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column gender
+		dataType: string
+		lineageTag: c1de6cda-8cbd-4084-a6f9-39fd57a3a7d1
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_of_birth
+		dataType: string
+		lineageTag: 41680683-866d-4bf5-a30d-77bb7b07b15b
+		summarizeBy: none
+		sourceColumn: date_of_birth
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: 25b94255-c31d-46b0-a7be-7d1ad80ab990
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: 1df1be8d-0217-441d-a13d-0fae6b27e524
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column occupation
+		dataType: string
+		lineageTag: 6c12accd-2b35-4eb4-8edc-c1cecc1c6e21
+		summarizeBy: none
+		sourceColumn: occupation
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_segment
+		dataType: string
+		lineageTag: a5deb2bc-463b-4032-886c-01fdc7870514
+		summarizeBy: none
+		sourceColumn: customer_segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column annual_income
+		dataType: double
+		lineageTag: 6a2a2662-379e-4913-ac78-5be0a89c1fbd
+		summarizeBy: sum
+		sourceColumn: annual_income
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column join_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6d01918e-9828-49f2-a88a-0d26a1bbdf8c
+		summarizeBy: none
+		sourceColumn: join_date
+
+		variation Variation
+			isDefault
+			relationship: 69faa51f-0d01-4660-9535-70cbd0c1facd
+			defaultHierarchy: LocalDateTable_e31c3ab4-a685-4f3a-b4b1-3b03931862be.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Customer_name
+		dataType: string
+		lineageTag: cde3d45c-4eb6-4ffc-957e-e2de110bb690
+		summarizeBy: none
+		sourceColumn: Customer_name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition customers = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("E:\BI Projects\Power BI - Finance Analysis\customers.csv"),[Delimiter=",", Columns=11, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"customer_id", type text}, {"fisrt_name", type text}, {"second_name", type text}, {"gender", type text}, {"date_of_birth", type text}, {"city", type text}, {"state", type text}, {"occupation", type text}, {"customer_segment", type text}, {"annual_income", type number}, {"join_date", type text}}),
+				    #"Changed Type with Locale" = Table.TransformColumnTypes(#"Changed Type", {{"join_date", type date}}, "en-GB"),
+				    #"Merged Columns" = Table.CombineColumns(#"Changed Type with Locale",{"fisrt_name", "second_name"},Combiner.CombineTextByDelimiter(" ", QuoteStyle.None),"Name"),
+				    #"Renamed Columns" = Table.RenameColumns(#"Merged Columns",{{"Name", "Customer_name"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
