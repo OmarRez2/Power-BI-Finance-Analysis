@@ -4,7 +4,7 @@
 
 [![Power BI](https://img.shields.io/badge/Power_BI-PBIP-F2C811?logo=powerbi&logoColor=111827)](FINANACE%20ANALYSIS%20PROJECT.pbip) [![Python](https://img.shields.io/badge/Python-Jupyter_Notebook-3776AB?logo=jupyter&logoColor=white)](analysis/Finance_Analysis.ipynb) [![SQL](https://img.shields.io/badge/SQL-SQLite_Views-2563EB?logo=sqlite&logoColor=white)](analysis/sql/views.sql)
 
-**Explore:** [Power BI project](FINANACE%20ANALYSIS%20PROJECT.pbip) · [Analysis notebook](analysis/Finance_Analysis.ipynb) · [KPI SQL](analysis/sql/views.sql) · [Business requirements](docs/Business%20Requirements.docx)
+**Explore:** [Power BI project](FINANACE%20ANALYSIS%20PROJECT.pbip) · [Analysis notebook](analysis/Finance_Analysis.ipynb) · [KPI SQL](analysis/sql/views.sql)
 
 ![FinSight Power BI landing page](assets/screenshots/01-landing.png)
 
@@ -101,7 +101,6 @@ SELECT * FROM v_state_top5;
 | `analysis/Finance_Analysis.ipynb` | Python cleaning, validation, SQLite build, and visualization |
 | `analysis/sql/views.sql` | Reusable KPI view definitions |
 | `analysis/power_query/` | Optional M alternatives; **not applied** to the current report |
-| `docs/Business Requirements.docx` | Original project brief |
 | `assets/source_images/` | Original design assets |
 | `assets/screenshots/` | Actual Power BI report screenshots used in this README |
 | `assets/screenshots/` | Actual Power BI report screenshots used in this README |
