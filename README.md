@@ -8,9 +8,6 @@
 
 ![FinSight Power BI landing page](assets/screenshots/01-landing.png)
 
-![FinSight Power BI landing page](assets/screenshots/01-landing.png)
-
-
 ## The business question
 
 How do transaction volume and customer activity change over time, across segments and locations, and by transaction type or status? FinSight brings those views together while keeping data-quality decisions visible. `amount` represents **signed transaction volume, not bank revenue**; fees and tax are separate measures.
@@ -21,18 +18,6 @@ How do transaction volume and customer activity change over time, across segment
 - **Overview Analysis:** KPI cards and year-over-year measures, a monthly trend, transaction-status mix, customer segments, states, transaction types, and gender breakdowns. Year and other slicers support exploration.
 - **Transactions:** a transaction-level view with customer and transaction attributes for follow-up.
 - **Independent analysis pipeline:** one notebook cleans and audits the source CSVs, creates a local SQLite database and KPI views, and produces static and optional interactive charts. The notebook does not change the Power BI report.
-
-## Power BI dashboard
-
-These are screenshots of the **actual Power BI report**, with no application menus or editing panes. The Overview and Transactions pages below show **Year = All**; the report's slicers and navigation are interactive when opened in Power BI Desktop.
-
-### Overview Analysis
-
-![FinSight Overview Analysis page with KPI cards, monthly trend, transaction status, customer segment, state, transaction type, and gender visuals](assets/screenshots/02-overview.png)
-
-### Transactions
-
-![FinSight Transactions page with KPI cards, slicers, and a transaction-level detail table](assets/screenshots/03-transactions.png)
 
 ## Power BI dashboard
 
